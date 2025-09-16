@@ -10,13 +10,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="build\**\*.*">
-			<Pack>True</Pack>
-			<PackagePath>buildTransitive</PackagePath>
-		</None>
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="13.10.0" />
 	</ItemGroup>
 
@@ -36,9 +29,5 @@
 	  <None Include="wwwroot\overlays\multiple-variants-overlay.controller.js" />
 	  <None Include="wwwroot\overlays\multiple-variants-sharepreview-overlay.html" />
 	  <None Include="wwwroot\package.manifest" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="App_Plugins\" />
 	</ItemGroup>
 </Project>
