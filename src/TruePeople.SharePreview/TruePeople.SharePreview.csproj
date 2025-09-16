@@ -1,55 +1,44 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 	<PropertyGroup>
-		<TargetFrameworks>net8.0</TargetFrameworks>
-	</PropertyGroup>
-
-	<!-- NuGet Package -->
-	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
 		<PackageId>TruePeople.SharePreview</PackageId>
-		<Version>2.0.1</Version>
-		<Authors>True People B.V.</Authors>
+		<Title>TruePeople SharePreview</Title>
 		<Description>Share preview URLs with non-Umbraco users!</Description>
-		<PackageTags>umbraco-marketplace umbraco preview 13</PackageTags>
-		<PackageProjectUrl>https://github.com/TruePeople/TruePeople.SharePreview</PackageProjectUrl>
-		<AssemblyName>TruePeople.SharePreview</AssemblyName>
 		<RootNamespace>TruePeople.SharePreview</RootNamespace>
-		<PackageIcon>icon-128.png</PackageIcon>
-		<PackageIconUrl />
-		<RepositoryUrl>https://github.com/TruePeople/TruePeople.SharePreview</RepositoryUrl>
-		<RepositoryType>git</RepositoryType>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<StaticWebAssetBasePath>App_Plugins/TruePeopleSharePreview</StaticWebAssetBasePath>
+		<PackageReleaseNotes>Updated to modern Umbraco v13 packaging approach</PackageReleaseNotes>
 	</PropertyGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
-		<PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="10.0.0" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net472'">
-		<PackageReference Include="UmbracoCms.Web" Version="8.7.0" />
+	<ItemGroup>
+		<None Include="build\**\*.*">
+			<Pack>True</Pack>
+			<PackagePath>buildTransitive</PackagePath>
+		</None>
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="..\..\assets\icon-128.png">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</None>
-		 <None Include="build\**">
-          <Pack>True</Pack>
-          <PackagePath>buildTransitive\net6.0</PackagePath>
-      </None>
+		<PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="13.10.0" />
 	</ItemGroup>
 
-	 <ItemGroup>
-    <Content Include="App_Plugins\TruePeopleSharePreview\**">
-      <Pack>True</Pack>
-      <PackagePath>content\App_Plugins\TruePeopleSharePreview</PackagePath>
-      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
+	<ItemGroup>
+	  <None Include="wwwroot\backoffice\shareablepreview\settings.html" />
+	  <None Include="wwwroot\backoffice\shareablepreview\sharepreview-settings.controller.js" />
+	  <None Include="wwwroot\components\multi-share-link.html" />
+	  <None Include="wwwroot\components\multisharelink.directive.js" />
+	  <None Include="wwwroot\components\single-share-link.html" />
+	  <None Include="wwwroot\components\singlesharelink.directive.js" />
+	  <None Include="wwwroot\css\main.css" />
+	  <None Include="wwwroot\js\sharepreview.copy.service.js" />
+	  <None Include="wwwroot\js\sharepreview.resource.js" />
+	  <None Include="wwwroot\js\sharepreview.service.js" />
+	  <None Include="wwwroot\lang\en-US.xml" />
+	  <None Include="wwwroot\lang\nl-NL.xml" />
+	  <None Include="wwwroot\overlays\multiple-variants-overlay.controller.js" />
+	  <None Include="wwwroot\overlays\multiple-variants-sharepreview-overlay.html" />
+	  <None Include="wwwroot\package.manifest" />
+	</ItemGroup>
 
-	 <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
-	   <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="13.0.0" />
-	 </ItemGroup>
-
+	<ItemGroup>
+	  <Folder Include="App_Plugins\" />
+	</ItemGroup>
 </Project>
