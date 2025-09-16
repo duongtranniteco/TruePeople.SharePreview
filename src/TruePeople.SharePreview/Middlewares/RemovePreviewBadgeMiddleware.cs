@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Umbraco.Extensions;
 
 namespace TruePeople.SharePreview.Middlewares
 {
@@ -41,6 +42,13 @@ namespace TruePeople.SharePreview.Middlewares
             await updatedStream.CopyToAsync(originalBody);
 
             context.Response.Body = originalBody;
+
+            //In New Umbraco, somehow it reponses with a 400 even if there is a location header
+            //So if there is a location header, we need to set the status code to 302
+            if (!context.Response.Headers["location"].ToString().IsNullOrWhiteSpace())
+            {
+                context.Response.StatusCode = 302;
+            }
         }
 
         public static Stream GenerateStreamFromString(string s)
